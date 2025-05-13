@@ -1,0 +1,27 @@
+server.port: 0
+
+spring:
+  cloud:
+    services:
+      registrationMethod: direct
+
+management.security.enabled: false
+spring.cloud.refresh.refreshable: false
+
+# Metrics
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+eureka.client.fetchRegistry: true
