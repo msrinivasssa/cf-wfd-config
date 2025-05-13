@@ -1,3 +1,67 @@
+spring:
+  config:
+    activate:
+      on-profile: cloud
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+    gateway:
+      x-forwarded:
+        enabled: true
+        for-enabled: true
+        proto-enabled: true
+        host-append: false
+        port-append: false
+        proto-append: false
+      routes:
+        - id: ui-root-route
+          uri: lb://where-for-dinner-ui
+          order: 1000
+          predicates:
+            - Path=/**
+            - Method=GET
+          filters:
+            - StripPrefix=0
+          metadata:
+            tags:
+              - ui
+        - id: ui-diningsearch-route
+          uri: lb://where-for-dinner-ui
+          predicates:
+            - Path=/diningsearch/**
+            - Method=GET
+          filters:
+            - StripPrefix=0
+        - id: search-api-route
+          uri: lb://where-for-dinner-search
+          predicates:
+            - Path=/api/search/**
+          filters:
+            - StripPrefix=0
+            - RewritePath=/api/search(?<segment>/?.*), ${segment}
+            - RemoveRequestHeader=Forwarded
+          metadata:
+            tags:
+              - search-api
+        - id: availability-api-route
+          uri: lb://where-for-dinner-availability
+          predicates:
+            - Path=/api/availability/**
+          filters:
+            - StripPrefix=0
+            - RewritePath=/api/availability(?<segment>/?.*), ${segment}
+            - RemoveRequestHeader=Forwarded
+          metadata:
+            tags:
+              - availability-api        
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: application/json,text/css,application/javascript
+    min-response-size: 2048
+
 server.port: 0
 
 spring:
