@@ -1,3 +1,10 @@
+server:
+  port: 0
+  compression:
+    enabled: true
+    mime-types: application/json,text/css,application/javascript
+    min-response-size: 2048
+
 spring:
   config:
     activate:
@@ -54,26 +61,18 @@ spring:
             - RemoveRequestHeader=Forwarded
           metadata:
             tags:
-              - availability-api        
-server:
-  port: 8080
-  compression:
-    enabled: true
-    mime-types: application/json,text/css,application/javascript
-    min-response-size: 2048
-
-server.port: 0
-
-spring:
-  cloud:
+              - availability-api
     services:
       registrationMethod: direct
+  cloud.refresh.refreshable: false
 
-management.security.enabled: false
-spring.cloud.refresh.refreshable: false
+eureka:
+  client:
+    fetchRegistry: true
 
-# Metrics
 management:
+  security:
+    enabled: false
   endpoint:
     metrics:
       enabled: true
@@ -87,5 +86,3 @@ management:
     export:
       prometheus:
         enabled: true
-
-eureka.client.fetchRegistry: true
