@@ -13,7 +13,7 @@ spring:
     loadbalancer:
       ribbon:
         enabled: false
-    hints:
+      hints:
         where-for-dinner-ui:
           hint: http
         where-for-dinner-search:
