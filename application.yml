@@ -8,7 +8,7 @@ server:
 spring:
   config:
     activate:
-      on-profile: default
+      on-profile: eureka
   cloud:
     loadbalancer:
       ribbon:
