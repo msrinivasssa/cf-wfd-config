@@ -8,11 +8,19 @@ server:
 spring:
   config:
     activate:
-      on-profile: cloud
+      on-profile: default
   cloud:
     loadbalancer:
       ribbon:
         enabled: false
+    hints:
+        where-for-dinner-ui:
+          hint: http
+        where-for-dinner-search:
+          hint: http
+        where-for-dinner-availability:
+          hint: http
+        
     gateway:
       x-forwarded:
         enabled: true
