@@ -23,7 +23,7 @@ spring:
         proto-append: false
       routes:
         - id: ui-root-route
-          uri: lb://where-for-dinner-ui
+          uri: lb:http://where-for-dinner-ui
           order: 1000
           predicates:
             - Path=/**
@@ -34,14 +34,14 @@ spring:
             tags:
               - ui
         - id: ui-diningsearch-route
-          uri: lb://where-for-dinner-ui
+          uri: lb:http://where-for-dinner-ui
           predicates:
             - Path=/diningsearch/**
             - Method=GET
           filters:
             - StripPrefix=0
         - id: search-api-route
-          uri: lb://where-for-dinner-search
+          uri: lb:http://where-for-dinner-search
           predicates:
             - Path=/api/search/**
           filters:
@@ -52,7 +52,7 @@ spring:
             tags:
               - search-api
         - id: availability-api-route
-          uri: lb://where-for-dinner-availability
+          uri: lb:http://where-for-dinner-availability
           predicates:
             - Path=/api/availability/**
           filters:
