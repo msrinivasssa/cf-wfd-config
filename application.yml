@@ -31,7 +31,7 @@ spring:
         proto-append: false
       routes:
         - id: ui-root-route
-          uri: lb:http://where-for-dinner-ui
+          uri: http://where-for-dinner-ui.apps.internal:8080
           order: 1000
           predicates:
             - Path=/**
@@ -42,7 +42,7 @@ spring:
             tags:
               - ui
         - id: ui-diningsearch-route
-          uri: lb:http://where-for-dinner-ui
+          uri: http://where-for-dinner-ui.apps.internal:8080
           predicates:
             - Path=/diningsearch/**
             - Method=GET
